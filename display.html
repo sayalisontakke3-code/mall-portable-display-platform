@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Display Screen</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<h2>Add Product to Display</h2>
+
+<div class="card">
+  <input id="productName" placeholder="Product Name">
+  <input id="price" placeholder="Price">
+  <input id="discount" placeholder="Discount (%)">
+  <textarea id="description" placeholder="Product Description"></textarea>
+  <input type="file" id="productImage" accept="image/*">
+  <button onclick="addProduct()">Save Product</button>
+</div>
+
+<h2>Live Mall Display</h2>
+<div id="display" class="display-grid"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
