@@ -19,29 +19,44 @@ function getImageBase64(file, callback) {
 
 // Add Product
 function addProduct() {
-  const imageFile = productImage.files[0];
-  if (!imageFile) {
-    alert("Please upload product image");
+  const name = document.getElementById("productName").value;
+  const price = document.getElementById("price").value;
+  const discount = document.getElementById("discount").value;
+  const description = document.getElementById("description").value;
+  const imageInput = document.getElementById("productImage");
+
+  if (!name || !price || !description) {
+    alert("Please fill all product details");
     return;
   }
 
-  getImageBase64(imageFile, function (imgData) {
+  if (!imageInput.files || !imageInput.files[0]) {
+    alert("Please upload a product image");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function () {
     let products = JSON.parse(localStorage.getItem("products")) || [];
 
     products.push({
-      name: productName.value,
-      price: price.value,
-      discount: discount.value,
-      description: description.value,
-      image: imgData,
+      name,
+      price,
+      discount,
+      description,
+      image: reader.result,
       views: 0,
       sold: 0
     });
 
     localStorage.setItem("products", JSON.stringify(products));
-    loadDisplay();
-    alert("Product Added to Display");
-  });
+
+    alert("✅ Product saved successfully");
+
+    loadDisplay(); // refresh display instantly
+  };
+
+  reader.readAsDataURL(imageInput.files[0]);
 }
 
 // Load Display Screen
