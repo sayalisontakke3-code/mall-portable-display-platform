@@ -67,8 +67,12 @@ function loadDisplay() {
   let products = JSON.parse(localStorage.getItem("products")) || [];
   display.innerHTML = "";
 
-  products.forEach((p, i) => {
-    p.views++;
+  if (products.length === 0) {
+    display.innerHTML = "<p>No products added yet.</p>";
+    return;
+  }
+
+  products.forEach((p, index) => {
     display.innerHTML += `
       <div class="product-card">
         <img src="${p.image}">
@@ -76,13 +80,11 @@ function loadDisplay() {
           <h3>${p.name}</h3>
           <p>${p.description}</p>
           <p><b>₹${p.price}</b> • ${p.discount}% OFF</p>
-          <button onclick="buy(${i})">Scan & Buy</button>
+          <button onclick="buy(${index})">Scan & Buy</button>
         </div>
       </div>
     `;
   });
-
-  localStorage.setItem("products", JSON.stringify(products));
 }
 
 // Buy Product
