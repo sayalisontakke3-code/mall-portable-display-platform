@@ -142,8 +142,9 @@ function loadCustomers() {
   });
 }
 
-window.onload = () => {
+window.onload = function () {
   loadDisplay();
   loadAnalytics();
   loadCustomers();
 };
+
