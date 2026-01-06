@@ -1,3 +1,5 @@
+alert("app.js connected successfully");
+
 // Save Vendor
 function saveVendor() {
   const vendor = {
